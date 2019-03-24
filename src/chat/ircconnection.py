@@ -266,8 +266,8 @@ class IrcConnection(IrcSignals, SimpleIRCClient):
                                         added, removed)
 
     def _parse_elevation(self, modes):
-        add = re.compile(".*\+([a-z]+)")
-        remove = re.compile(".*\-([a-z]+)")
+        add = re.compile(r".*\+([a-z]+)")
+        remove = re.compile(r".*\-([a-z]+)")
         mode_to_elevation = {"o": "@", "q": "~", "v": "+"}
 
         def get_elevations(expr):
@@ -346,7 +346,7 @@ class IrcConnection(IrcSignals, SimpleIRCClient):
     # possible, and mark the line as notice so views can display them
     # differently.
     def _parse_target_from_privnotice_message(self, text):
-        if re.match('\[[^ ]+\] ', text) is None:
+        if re.match(r'\[[^ ]+\] ', text) is None:
             return None, text
         prefix, rest = text.split(" ", 1)
         prefix = prefix[1:-1]
